@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Меруерт - Қыз ұзату шақыруы</title>
+    <link href="https://fonts.googleapis.com/css2?family=Marck+Script&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #fcf8f3;
+            --accent-gold: #c5a059;
+            --text-color: #5d544b;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Montserrat', sans-serif;
+            text-align: center;
+        }
+
+        /* Декоративный орнамент (символический) */
+        .ornament {
+            width: 100px;
+            margin: 20px auto;
+            opacity: 0.6;
+        }
+
+        header {
+            padding: 50px 20px;
+            background: linear-gradient(rgba(252, 248, 243, 0.8), rgba(252, 248, 243, 0.8)), 
+                        url('https://images.unsplash.com/photo-1617103996702-96ff29b1c467?q=80&w=1000&auto=format&fit=crop'); /* Заглушка под саукеле/ткань */
+            background-size: cover;
+            background-position: center;
+        }
+
+        h1 {
+            font-family: 'Marck Script', cursive;
+            font-size: 3.5rem;
+            color: var(--accent-gold);
+            margin-bottom: 10px;
+        }
+
+        .sub-title {
+            font-size: 1.2rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .section {
+            padding: 40px 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .date-box {
+            border-top: 1px solid var(--accent-gold);
+            border-bottom: 1px solid var(--accent-gold);
+            padding: 20px 0;
+            margin: 30px 0;
+        }
+
+        .timer {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            font-size: 1.2rem;
+            margin-top: 20px;
+        }
+
+        .timer-item span {
+            display: block;
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: var(--accent-gold);
+        }
+
+        /* Кнопка и форма */
+        .btn {
+            background-color: var(--accent-gold);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #b08d4a;
+        }
+
+        input {
+            padding: 12px;
+            width: 80%;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        footer {
+            padding: 40px;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="sub-title">Қыз ұзату</div>
+        <h1>Меруерт</h1>
+        <p>Ақ босаға аттау сәтінің куәсі болыңыздар!</p>
+    </header>
+
+    <div class="section">
+        <img src="https://cdn-icons-png.flaticon.com/512/3106/3106841.png" alt="Ornament" class="ornament"> <div class="date-box">
+            <h3>05 . 07 . 2026</h3>
+            <p>Сағат 14:00-де басталады</p>
+            <p><strong>Көкшетау қаласы, "Көкшетау" мейрамханасы</strong></p>
+        </div>
+
+        <div class="timer" id="countdown">
+            <div class="timer-item"><span id="days">0</span>күн</div>
+            <div class="timer-item"><span id="hours">0</span>сағат</div>
+            <div class="timer-item"><span id="minutes">0</span>минут</div>
+        </div>
+    </div>
+
+    <div class="section" style="background: #fff; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+        <h3>Тойға келетініңізді растаңыз</h3>
+        <p>Сізді асыға күтеміз!</p>
+        <input type="text" id="guestName" placeholder="Сіздің есіміңіз">
+        <br>
+        <button class="btn" onclick="sendToWhatsApp()">Растау жіберу</button>
+    </div>
+
+    <div class="section">
+        <a href="https://2gis.kz/kokshetau/search/ресторан%20Кокшетау" target="_blank" style="color: var(--accent-gold);">📍 Картадан көру (2ГИС)</a>
+    </div>
+
+    <footer>
+        <p>© 2026 Меруерттің Ұзату тойы</p>
+    </footer>
+
+    <script>
+        // Таймер обратного отсчета
+        const targetDate = new Date('July 5, 2026 14:00:00').getTime();
+
+        setInterval(() => {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            document.getElementById('days').innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
+            document.getElementById('hours').innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            document.getElementById('minutes').innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        }, 1000);
+
+        // Функция отправки в WhatsApp
+        function sendToWhatsApp() {
+            const name = document.getElementById('guestName').value;
+            if (!name) {
+                alert("Өтінеміз, есіміңізді жазыңыз");
+                return;
+            }
+            const phone = "77000000000"; // ЗАМЕНИ ЭТОТ НОМЕР НА СВОЙ
+            const message = `Сәлеметсіз бе! Мен, ${name}, Меруерттің ұзату тойына келетінімді растаймын.`;
+            window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, '_blank');
+        }
+    </script>
+</body>
+</html>
